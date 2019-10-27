@@ -1,0 +1,61 @@
+/**
+ * 
+ */
+$pageNo.val(1);
+$pageSize.val(9);
+if(sessionStorage.table==null){
+	sessionStorage.table="scenic;";
+}
+thisName=sessionStorage.table.split(";");
+table=thisName[0];
+goodsTypeId=thisName[1];
+url="common/jsp/frontModule.jsp";
+$.post("count.do",{"table":table,"goodsTypeId":goodsTypeId},function(data){
+	$pageForm.show();
+	$totalCount.html(data);
+	byPage(0);
+	load(url,null);
+})
+//详情页局部刷新
+$("#frontTitle>li").click(function(){
+	$this=$(this);
+	$this.addClass("frontTitleActive");
+	$this.siblings().removeClass("frontTitleActive");
+	sessionStorage.table=$this.attr("name");
+	thisName=sessionStorage.table.split(";");
+	table=thisName[0];
+	goodsTypeId=thisName[1];
+	$.post("count.do",{"table":table,"goodsTypeId":goodsTypeId},function(data){
+		$totalCount.html(data);
+		byPage(0);
+		keyword=null;
+		load(url,null);
+	})
+})
+//跳转页码
+$(".btnPage").click(function(){
+	byPage($(this).attr("value"));
+	load(url,null);
+})
+//前端搜索框
+$("#search").click(function(){
+	$pageNo.val(1);
+	$pageSize.val(5);
+	thisName=$("#searchDiv>select").val().split(";");
+	table=thisName[0];
+	goodsTypeId=thisName[1];
+	keyword=$("#content").val();
+	$.post("count.do",{"table":table,"goodsTypeId":goodsTypeId,"keyword":keyword},function(data){
+		$totalCount.html(data);
+		totalPage=Math.ceil(parseInt($totalCount.html())/parseInt($pageSize.val()));
+		$totalPage.html(totalPage);
+		byPage(0);
+		load(url,null);
+	})
+})
+//显示图片详情样式
+$("#module").on("mouseenter",".travelTr",function(){
+	$(this).children(".detail").css("visibility","visible");
+}).on("mouseleave",".travelTr",function(){
+	$(this).children(".detail").css("visibility","hidden");
+})

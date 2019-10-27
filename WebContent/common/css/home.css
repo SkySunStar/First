@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+#navigate{
+	padding: 10px;
+}
+#navigate>li{
+	list-style: none;
+	margin-bottom:20px;
+	height: 320px;
+	white-space: nowrap;
+}
+
+.homeTitle{
+	padding:20px;
+	display:inline-block;
+	cursor: pointer;
+ 	font: 600 50px "KaiTi";
+	height:260px;
+	color:#ff0000;
+	background:#80ffff;
+	writing-mode: vertical-lr;
+	letter-spacing:20px;
+	text-align:center;
+	border-top: 2px solid #FFFFFF;
+	border-left: 2px solid #FFFFFF;
+	border-bottom: 2px solid #717171;
+	border-right: 2px solid #717171;
+	animation:change 10s linear 0s infinite;
+} 
+
+@keyframes change{
+	0%{
+		color:#ff0000;
+		background:#80ffff;
+	}
+	25%{
+		color:#ff00ff;
+		background:#00ff80;
+	}
+	50%{
+		color:#0000ff;
+		background:#ffff80;
+	}
+	75%{
+		color:#800040;
+		background:#c0c0c0;
+	}
+}	
+.homeTitle:active{
+	border-top: 2px solid #717171;
+	border-left: 2px solid #717171;
+	border-bottom: 2px solid #FFFFFF;
+	border-right: 2px solid #FFFFFF;
+}
+
+.homeContent{
+	margin-right:20px;
+	display:inline-block;
+	width: 250px;
+	height:300px;
+	border: 1px solid #000000;
+	vertical-align: top;
+}
+.homeContent img{
+	width: 100%;
+	height:100%;
+}
+
+.homeContent:hover,.homeContent img:hover{
+	border: 1px solid #ff0080;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #ff0080 ;
+}
+.more{
+	display: inline-block;
+	vertical-align:top;
+	background-color: #8080c0;
+	width:0px;
+	height:0px;
+	border-left: 30px solid transparent; 
+	border-right: 30px solid transparent; 
+	border-bottom: 150px solid #c0c0c0; 
+	border-top: 150px solid #c0c0c0; 
+	cursor: pointer;
+}
+.more:hover{
+	animation:more 0.5s linear 0s 1;
+}
+@keyframes more{
+	10%{
+		width:10px;
+		border-left: 25px solid transparent; 
+		border-right: 25px solid transparent; 
+	}
+	40%{
+		width:20px;
+		border-left: 18px solid transparent; 
+		border-right: 18px solid transparent; 
+	}
+	70%{
+		width:40px;
+		border-left: 8px solid transparent; 
+		border-right: 8px solid transparent; 
+	}
+}
+.more span{
+	display:inline-block;
+	width:60px;
+	height:300px;
+	text-align:center;
+	position:relative;
+	top:-150px;
+	left:-25px;
+	display: inline-block;
+	color:#804000;
+	writing-mode: vertical-lr;
+	letter-spacing:10px;
+	font: 600 40px "KaiTi";
+}
+.more span:hover{
+	animation:moreChange 0.5s linear 0s 1;
+}
+@keyframes moreChange{
+	10%{
+		padding-left:10px;
+		font: 400 30px "KaiTi";
+	}
+	40%{
+		padding-left:20px;
+		font: 200 20px "KaiTi";
+	}
+	70%{
+		padding-left:40px;
+		font: 100 10px "KaiTi";
+	}
+}

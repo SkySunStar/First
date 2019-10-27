@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+/*模态框覆盖层样式*/
+#modal-overlay {
+	bottom:0px;
+	height:1000px;
+	background-color:rgba(0, 0, 0, 0.5);
+}
+#close{
+	color:#ff0000;
+	padding:5px 10px;
+	font:600 30px "Microsoft YaHei";
+	cursor: pointer;
+}
+#close:hover{
+	display:inline-block;
+	padding:0 5px;
+	border: 5px solid #ff0000;
+}
+/* 模态框样式 */
+#modal-data{
+	 width:600px;
+     margin:5% auto;
+     background-color:#c0c0c0;
+     border-radius: 10px;
+}
+
+/*标题样式*/
+#manageTitle dt{
+	display:inline-block;
+	margin-left:25px;
+	padding:20px 50px;
+	background-color: #c0c0c0;
+	font:600 40px "KaiTi";
+	text-align:center;
+	text-shadow: 0 0 1px;
+	color:#0080ff;
+	cursor: pointer;
+	animation:change 4s linear 0s infinite;
+	border-top: 5px solid #ff0000;
+	border-left: 5px solid #ff8000;
+	border-bottom: 5px solid #ffff00;
+	border-right: 5px solid #008000;
+}
+@keyframes change{
+	0%{
+		border-top: 5px solid #ff0000;
+		border-left: 5px solid #ff8000;
+		border-bottom: 5px solid #ffff00;
+		border-right: 5px solid #008000;
+	}
+	25%{
+		border-top: 5px solid #008000;
+		border-left: 5px solid #ff0000;
+		border-bottom: 5px solid #ff8000;
+		border-right: 5px solid #ffff00;
+	}
+	50%{
+		border-top: 5px solid #ffff00;
+		border-left: 5px solid #008000;
+		border-bottom: 5px solid #ff0000;
+		border-right: 5px solid #ff8000;
+	}
+	75%{
+		border-top: 5px solid #ff8000;
+		border-left: 5px solid #ffff00;
+		border-bottom: 5px solid #008000;
+		border-right: 5px solid #ff0000;
+	}
+}
+#add{
+	padding:10px 20px;
+	letter-spacing:5px;
+	background-color: #ff80ff;
+	cursor: pointer;
+	border-top: 2px solid #FFFFFF;
+	border-left: 2px solid #FFFFFF;
+	border-bottom: 2px solid #71717;
+	border-right: 2px solid #717171;
+}
+#add:active{
+	border-top: 2px solid #717171;
+	border-left: 2px solid #717171;
+	border-bottom: 2px solid #FFFFFF;
+	border-right: 2px solid #FFFFFF;
+}
+#manageBody{
+	min-height: 1000px;
+}
+#otherDetail{
+	visibility:hidden;
+	float:right;
+	text-align: center;
+	position: relative;
+	top:-1035px;
+	right:70px;
+}
+#otherDetail>dt{
+	padding: 10px;
+	font:600 25px "KaiTi";
+	background-color: #c0c0c0;
+	color:#0080ff;
+	cursor: pointer;
+}
+#otherDetail>dt:hover{
+	background-color: #ff8000;
+}
+/*搜索选择商家样式*/
+#souSeller{
+	display:inline-block;
+	margin:0px;
+	position:relative;
+	left:195px;
+	top:-110px;
+	background-color:#ffffff;
+	border: 1px solid red;
+}
+.sellerDt{
+	padding:5px 10px;
+}
+.sellerDtHover{
+	background-color: #ff8000;
+	cursor: pointer;
+}
+/*公共表格样式*/
+#module table{
+	margin: 10px auto;
+	border-collapse:collapse;
+}
+.tableLimit thead>tr{
+	height:50px;
+	color:#ffffff;
+	font:600 20px "Microsoft YaHei";
+	background-color: #8080c0;
+}
+.tableLimit th{
+	border: 3px solid #ff8000;
+}
+.tableLimit tbody>tr{
+	height:40px;
+	color:#004040;
+	background-color: #ffb4ff;
+}
+.tableLimit td{
+	border: 3px solid #408080;
+	text-align: center;
+	overflow:hidden;
+}
+.tableLimit tbody>tr:hover{
+	background-color: #ffffff;
+}
+.tableLimit{
+	max-height:2000px;
+	overflow: scroll;
+}
+.tableLimit img{
+	height:50px;
+	width: 200px;
+}
+.tableLimit div{
+	height: 50px;
+	width: 200px;
+	line-height:50px;
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.subList textarea{
+	resize: vertical;
+}
+.subList tr:not(:last-of-type){
+	height: 60px;
+	color:#800000;
+	font:600 30px "KaiTi";
+	border-bottom: 5px solid #004000;
+}
+.subList td:first-of-type{
+	text-align: center;
+}
+.subList tr:last-of-type input{
+	margin:20px 50px;
+	padding:5px 10px;
+	font:600 25px "KaiTi";
+	border: 3px solid #ff8040;
+	border-radius: 10px;
+}
+.subList .input,.subList select,#userform [type=password]{
+	height:30px;
+	width:330px;
+	font:600 20px "SimSun";
+	border-radius: 5px;
+}

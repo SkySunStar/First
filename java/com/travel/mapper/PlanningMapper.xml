@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.PlanningMapper">
+	<cache/>
+	<select id="getPlanning" resultMap="planningResult">
+	SELECT
+		p.id AS planning_id,
+		p.name AS planning_name,
+		p.username AS planning_username,
+		s.id AS scenic_id,
+		s.name AS scenic_name,
+		s.information AS scenic_information,
+		s.address AS scenic_address,
+		s.image AS scenic_image,
+		g.id AS goods_id,
+		g.name AS goods_name,
+		g.information AS goods_information,
+		g.price AS goods_price,
+		g.image AS goods_image,
+		goods_type_id,
+		seller_id 
+	FROM planning p
+	LEFT JOIN scenic s ON p.scenic_id = s.id
+	LEFT JOIN goods g ON p.goods_id = g.id 
+	LIMIT #{startPage},#{pageSize}
+	</select>
+	<resultMap type="Planning" id="planningResult">
+		<id property="id" column="planning_id"/>
+		<result property="name" column="planning_name"/>
+		<result property="username" column="planning_username"/>
+		<association property="scenic" resultMap="scenicResult"/>
+		<association property="goods" resultMap="goodsResult"/>
+	</resultMap>
+	<resultMap type="Scenic" id="scenicResult">
+		<id property="id" column="scenic_id"/>
+		<result property="name" column="scenic_name"/>
+		<result property="information" column="scenic_information"/>
+		<result property="address" column="scenic_address"/>
+		<result property="image" column="scenic_image"/>
+	</resultMap>
+	<resultMap type="Goods" id="goodsResult">
+		<id property="id" column="goods_id"/>
+		<result property="name" column="goods_name"/>
+		<result property="information" column="goods_information"/>
+		<result property="price" column="goods_price"/>
+		<result property="image" column="goods_image"/>
+		<result property="goodsTypeId" column="goods_type_id"/>
+		<result property="sellerId" column="seller_id"/>
+	</resultMap>
+	
+	<insert id="insertPlanning">
+		insert into planning 
+		(name,username,scenic_id,goods_id) values
+		(#{name},#{username},#{scenicId},#{goodsId})
+	</insert>
+
+	<update id="updatePlanning">
+		update planning 
+		<set> 
+			<if test="name != ''">name=#{name},</if>
+			<if test="username != ''">username=#{username},</if>
+			<if test="scenicId != ''">scenic_id=#{scenicId},</if>
+			<if test="goodsId != ''">goods_id=#{goodsId},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<delete id="deletePlanning">
+		delete from planning where id=#{id}
+	</delete>
+</mapper>

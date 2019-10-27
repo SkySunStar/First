@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.SellerMapper">
+	<cache/>
+	<select id="getSellerListByPage" resultType="Seller" parameterType="map">
+		select * from seller 
+		<where>
+			<if test="keyword!=null and keyword!=''">
+			<bind name="keywords" value="'%'+keyword+'%'"/>
+				name like #{keywords} or
+				telephone like #{keywords} or
+				address like #{keywords}
+			</if>
+		</where>
+		limit #{startPage},#{pageSize}
+	</select>
+	
+	<insert id="insertSeller">
+		insert into seller 
+		(name,telephone,address) values
+		(#{name},#{telephone},#{address})
+	</insert>
+	
+	<update id="updateSeller">
+		update seller 
+		<set> 
+			<if test="name != ''">name=#{name},</if>
+			<if test="telephone != ''">telephone=#{telephone},</if>
+			<if test="address != ''">address=#{address},</if>
+		</set>
+		where id=#{id}
+	</update>
+	<delete id="deleteSeller">
+		delete from seller where id=#{id}
+	</delete>
+</mapper>

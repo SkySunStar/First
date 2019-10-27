@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+/*模态框显示ʽ*/
+#modal-overlay {
+	 visibility: hidden;    
+     position: absolute;
+     left: 0px; 
+     right:0px;   
+     top: 0px;
+}
+/*水平分割线*/
+hr{
+	border:0px;
+}
+#firstHr{
+	margin:5px auto;
+	height: 5px;
+	background-image: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(255, 128, 128, 0.75) 25%, rgba(0, 140, 200, 0.75));
+}
+#lastHr{
+	margin:0px auto;
+	height: 10px;
+	background-image: linear-gradient(0deg, rgba(255, 255, 180, 1) 30%, rgba(255, 128, 0, 0.75));
+}
+
+/*页眉样式ʽ*/
+#header{
+	padding-right:100px;
+	height:50px;
+	line-height:50px;
+	text-align: right;
+	font-size:20px;
+	color: #ffffff;
+	background-color: #008cc8;
+	border-radius: 20px;
+}
+
+#home{
+	margin-left:20px;
+	padding:5px 20px;
+	background-color:#ff8000;
+	border-radius: 20px;
+}
+#header a{
+   text-decoration: none;
+}
+#header a:hover{
+	color: #00ff00;
+    text-decoration: underline;
+}
+#header a:active{
+    color: #ff0000;
+}
+#title{
+	padding:8px;
+	position: absolute;
+	left: 8px;
+	width:200px;
+	text-align:center;
+	color:#ff0000;
+	font:800 30px "KaiTi";
+	letter-spacing:4px;
+	background-color:#c0c0c0;
+	border-radius:20px 0 0 20px;
+}
+#title:hover{
+	background-color:#ff0000;
+}
+#login,#register{
+	cursor: pointer;
+}
+/*搜索框*/
+#searchDiv{
+	display:inline-block;
+	margin-right: 100px;
+	
+}
+#searchDiv select,#searchDiv input{
+	color:#0000a0;
+	background-color:#fafafa;
+	font:600 25px "SimSun";
+}
+/*页脚样式ʽ*/
+#footer{
+	background-color: #ffffb4;
+}
+#footer:before,#footer:after{
+	content: "";
+	height:20px;
+	display: block;
+}
+#footer>div{
+	margin:10px;
+	text-align: center;
+	color: #005782;
+}
+/*主体样式*/
+body{
+	 background-color: #e6e6e6;
+	 overflow: scroll;
+}
+/*分页样式*/
+#pageForm{
+	padding:10px;
+	color:#008000;
+	font:600 25px "Microsoft YaHei";
+	background-color: #d2d2d2;
+	border-radius: 10px;
+	text-align: center;
+}
+#pageForm input,#pageForm span{
+	margin:10px;
+	width: 80px;
+	font:600 25px "Microsoft YaHei";
+	color: #2e5a5a;
+	border-radius: 10px;
+}
+
+.mod,.del,.btnPage{
+	cursor: pointer;
+}
+.mod,.del{
+	margin: 5px;
+	font:600 25px "KaiTi";
+}
+.mod:hover,.del:hover{
+	color:#00ff40;
+	text-decoration: underline;
+}
+.btnPage:hover{
+	padding:10px;
+	background-color: #ff8040;
+}

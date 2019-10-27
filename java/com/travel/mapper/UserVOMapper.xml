@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.UserVOMapper">
+	<cache/>
+	<select id="getUser" resultType="UserVO" >
+		select * from user where name=#{name} and password=#{password} and isDelete=0
+	</select>
+	
+	<select id="getUserValidate" resultType="int">
+		select count(1) from ${table} where ${param}=#{value} 
+	</select>
+	
+	<select id="getUserListByPage" resultType="UserVO" parameterType="map">
+		select * from user
+		left outer join user_info on user.id=user_info.user_id
+		<where>
+			<if test="rights==1">name=#{name} or rights=0</if>
+			<if test="keyword!=null and keyword!=''">
+			<bind name="keywords" value="'%'+keyword+'%'"/>
+				and (name like #{keywords} or
+				realname like #{keywords} or
+				telephone like #{keywords} or
+				address like #{keywords})
+			</if>
+			and isDelete=0
+		</where>
+		limit #{startPage},#{pageSize} 
+	</select>
+	
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+		insert into user (name,password,rights,isDelete) values(#{name},#{password},#{rights},#{isDelete})
+	</insert>
+	<insert id="insertUserInfo">
+		insert into user_info 
+		(realname,telephone,address,user_id) values
+		(#{realname},#{telephone},#{address},#{userId})
+	</insert>
+	
+	
+	<update id="updateUser" >
+		update user
+		<set>
+			<if test="name != ''">name=#{name},</if>
+      		<if test="password != ''">password=#{password},</if>
+      		rights=#{rights},
+      		isDelete=#{isDelete}
+		</set>
+		where id=#{id}
+	</update>
+	<update id="updateUserInfo">
+		update user_info
+		<set>
+			<if test="realname != ''">realname=#{realname},</if>
+      		<if test="telephone != ''">telephone=#{telephone},</if>
+      		<if test="address != ''">address=#{address}</if>
+		</set>
+		where user_id=#{userId}
+	</update>
+	
+	<update id="deleteUser" >
+		update user set isDelete=1 where id=#{id}
+	</update>
+</mapper>

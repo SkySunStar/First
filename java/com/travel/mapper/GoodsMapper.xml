@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.GoodsMapper">
+	<cache/>
+	<select id="getGoodsListByPage" resultMap="goodsResult" parameterType="map">
+	SELECT
+		g.id AS goods_id,
+		g.name AS goods_name,
+		g.information AS goods_information,
+		g.price AS goods_price,
+		g.image AS goods_image,
+		gt.id AS goods_type_id,
+		gt.name AS goods_type_name,
+		gt.type_id AS goods_type_type_id,
+		s.id AS seller_id,
+		s.name AS seller_name,
+		s.telephone AS seller_telephone,
+		s.address AS seller_address 
+	FROM goods g
+		 RIGHT JOIN goods_type gt ON g.goods_type_id = gt.id
+		 RIGHT JOIN seller s ON g.seller_id = s.id 
+	WHERE g.type_id = #{typeId}
+	<if test="keyword!=null  and keyword!=''">
+		<bind name="keywords" value="'%'+keyword+'%'"/>
+		and (g.name like #{keywords} or
+		g.information like #{keywords})
+	</if>
+	LIMIT #{startPage},#{pageSize}
+	</select>
+	<resultMap type="Goods" id="goodsResult">
+		<id property="id" column="goods_id"/>
+		<result property="name" column="goods_name"/>
+		<result property="information" column="goods_information"/>
+		<result property="price" column="goods_price"/>
+		<result property="image" column="goods_image"/>
+		<association property="goodsType" resultMap="goodsTypeResult"/>
+		<association property="seller" resultMap="sellerResult"/>
+	</resultMap>
+	<resultMap type="GoodsType" id="goodsTypeResult">
+		<id property="id" column="goods_type_id"/>
+		<result property="name" column="goods_type_name"/>
+		<result property="typeId" column="goods_type_type_id"/>
+	</resultMap>
+	<resultMap type="Seller" id="sellerResult">
+		<id property="id" column="seller_id"/>
+		<result property="name" column="seller_name"/>
+		<result property="telephone" column="seller_telephone"/>
+		<result property="address" column="seller_address"/>
+	</resultMap>
+	
+	<insert id="insertGoods">
+		insert into goods 
+		(name,information,price,image,goods_type_id,seller_id,type_id) values
+		(#{name},#{information},#{price},#{image},#{goodsTypeId},#{sellerId},#{typeId})
+	</insert>
+	
+	<update id="updateGoods">
+		update goods
+		<set> 
+			<if test="name != ''">name=#{name},</if>
+			<if test="information != ''">information=#{information},</if>
+			<if test="price != ''">price=#{price},</if>
+			<if test="image != null and image != ''">image=#{image},</if>
+			<if test="goodsTypeId != ''">goods_type_id=#{goodsTypeId},</if>
+			<if test="sellerId != ''">seller_id=#{sellerId},</if>
+			<if test="typeId != ''">type_id=#{typeId},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteGoods">
+		delete from goods where id=#{id}
+	</delete>
+</mapper>

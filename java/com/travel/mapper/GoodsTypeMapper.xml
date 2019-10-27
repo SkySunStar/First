@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.GoodsTypeMapper">
+	<cache/>
+	<select id="getGoodsTypeListByPage" resultType="GoodsType" parameterType="map">
+		select * from goods_type 
+		<where>
+			<if test="keyword!=null and keyword!=''">
+				name like concat('%',#{keyword},'%')
+			</if>
+			<if test="typeId!=null and typeId!=''">
+			and type_id=#{typeId}
+			</if>
+		</where>
+		limit #{startPage},#{pageSize}
+	</select>
+	
+	<insert id="insertGoodsType">
+		insert into goods_type 
+		(name,type_id) values
+		(#{name},#{typeId})
+	</insert>
+	
+	<update id="updateGoodsType">
+		update goods_type 
+		<set> 
+			<if test="name != ''">name=#{name}</if>
+			<if test="typeId != ''">type_id=#{typeId}</if>
+		</set>
+		where id=#{id}
+	</update>
+	<delete id="deleteGoodsType">
+		delete from goods_type where id=#{id}
+	</delete>
+</mapper>

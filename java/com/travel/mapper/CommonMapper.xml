@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.CommonMapper">
+	<cache/>
+	<select id="getCount" resultType="int" parameterType="map">
+		select count(1) from ${table}
+		<if test="table=='user'">
+			left join user_info on user.id=user_info.user_id
+		</if>
+		<where>
+			<if test="table=='user'">isDelete=0 </if>
+			<if test="typeId!=null and typeId!=''">and type_id=#{typeId}</if>
+			<if test="name!=null and rights==1">and name=#{name} or rights=0</if>
+			<if test="keyword!=null and keyword!=''">
+			<bind name="keywords" value="'%'+keyword+'%'"/>
+			and <foreach collection="fieldList" item="field" separator="or" open="(" close=")">
+					${field} like #{keywords}
+				</foreach>
+			</if>
+		</where>
+	</select>
+</mapper>
